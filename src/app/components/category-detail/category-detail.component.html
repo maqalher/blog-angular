@@ -1,12 +1,20 @@
-<div class="loadig" *ngIf="!posts">
+<div class="loadig" *ngIf="!category">
   Cargando...
 </div>
 
-<div class="container-fluid mt-3" *ngIf="posts">
-  <h1>{{page_title}}</h1>
+<div class="container-fluid mt-3" *ngIf="category">
+  <h1>{{category.name}}</h1>
   <hr>
 
-  <div class="card-columns">
+  <div class="loadig" *ngIf="!posts">
+    Cargando listado...
+  </div>
+
+  <div class="alert alert-warning" *ngIf="posts && posts.length == 0">
+    No hay entradas que mostrar
+  </div>
+
+  <div class="card-columns" *ngIf="posts && posts.length >= 1">
     <article class="card w-100" *ngFor="let post of posts">
       <div class="card-header">
         <h3>
@@ -28,7 +36,8 @@
           <span *ngIf="identity && identity.sub == post.user_id">
             <a [routerLink]="['/editar-entrada', post.id]" class="btn btn-warning mr-2">Editar</a>
 
-            <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#myModal'+post.id">Borrar</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal"
+              [attr.data-target]="'#myModal'+post.id">Borrar</button>
 
             <!-- Modal -->
             <div id="{{'myModal' + post.id }}" class="modal fade" role="dialog">
@@ -55,5 +64,7 @@
       </div>
     </article>
   </div>
+
+
 
 </div>

@@ -35,13 +35,24 @@ export class HomeComponent implements OnInit {
       response => {
         if(response.status == 'success'){
           this.posts = response.posts;
-          console.log(this.posts);
+          // console.log(this.posts);
         }
       },
       error => {
         console.log(error);
       }
     )
+  }
+
+  deletePost(id){
+    this._postService.delete(this.token, id).subscribe(
+      response => {
+        this.getPost();  // recarga los post
+      },
+      error => {
+        console.log(error)
+      }
+    );
   }
 
 }

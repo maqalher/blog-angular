@@ -1,0 +1,17 @@
+<div class="col-md-12" *ngIf="!post">
+  Cargando...
+</div>
+
+<div class="col-md-12" *ngIf="post">
+  <h1>{{post.title}}</h1>
+  <small>{{post.category.name}} - {{post.user.name + ' ' +  post.user.surname}}</small>
+  <div>
+    <img *ngIf="post.image" class="img-fluid" src="{{url + 'post/image/' + post.image}}" alt=""/>
+    <img *ngIf="!post.image"  class="img-fluid" src="assets/images/default-image.png" alt="" />
+
+  </div>
+
+  <hr>
+
+  <p [innerHtml]="post.content"></p>
+</div>

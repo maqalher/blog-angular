@@ -1,0 +1,57 @@
+<div class="col-md-12 mt-3">
+  <h1>{{page_title}}</h1>
+  <p >Modifica el post</p>
+  <hr>
+
+  <div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+    El post se ha guardado correctamente !!
+  </div>
+
+  <div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
+    El post no se ha guardado !!
+  </div>
+  <hr>
+
+  <!-- Formulario Crear categoria -->
+  <form action="" class="col-md-5 ml-0 pl-0" #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+
+    <div class="form-group">
+      <label for="title">Titulo</label>
+      <input type="text" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
+
+      <small class="invalid-feedback d-block" *ngIf="!title.valid && title.touched">
+        El titulo no es valido
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Contenido</label>
+      <textarea [froalaEditor]="froala_options" name="content" #content="ngModel"
+        [(ngModel)]="post.content" [(froalaModel)]="post.content" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Contenido</label>
+      <select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" class="form-control">
+        <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Imagen</label>
+
+      <!-- <div *ngIf="identity && identity.image">
+        <img src="{{url + 'user/avatar/'+ identity.image}}" class="avatar_edit" alt="">
+      </div> -->
+
+      <angular-file-uploader [config]="afuConfig" (ApiResponse)="imagenUpload($event)">
+      </angular-file-uploader>
+    </div>
+
+    <input type="submit" value="Editar" class="btn btn-success" [disabled]="postForm.invalid" />
+
+  </form>
+
+  <br>
+
+</div>
