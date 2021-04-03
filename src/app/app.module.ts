@@ -11,12 +11,19 @@ import { AppRouting} from './app.routing';
 // servicio
 import { HttpClientModule } from '@angular/common/http';
 
+// Plugins
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DefaultComponent } from './components/default/default.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { AngularFileUploaderModule } from "angular-file-uploader";
+import { CategoryNewComponent } from './components/category-new/category-new.component';
+import { PostNewComponent } from './components/post-new/post-new.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +32,19 @@ import { ErrorComponent } from './components/error/error.component';
     RegisterComponent,
     DefaultComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    UserEditComponent,
+    CategoryNewComponent,
+    PostNewComponent
   ],
   imports: [
     BrowserModule,
     AppRouting,
     FormsModule,
     HttpClientModule,
+    FroalaEditorModule,
+    FroalaViewModule,
+    AngularFileUploaderModule
   ],
   providers: [
     // appRoutingProviders
