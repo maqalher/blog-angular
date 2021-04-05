@@ -4,7 +4,7 @@
 
 <div class="col-md-12" *ngIf="post">
   <h1>{{post.title}}</h1>
-  <small>{{post.category.name}} - {{post.user.name + ' ' +  post.user.surname}}</small>
+  <small>{{post.category.name}} - <a [routerLink]="['/perfil', post.user.id]">{{post.user.name + ' ' +  post.user.surname}}</a> </small>
   <div>
     <img *ngIf="post.image" class="img-fluid" src="{{url + 'post/image/' + post.image}}" alt=""/>
     <img *ngIf="!post.image"  class="img-fluid" src="assets/images/default-image.png" alt="" />
