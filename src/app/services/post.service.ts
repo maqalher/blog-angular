@@ -14,8 +14,11 @@ export class PostService {
     this.url = global.url;
   }
 
-  create(token, category):Observable<any>{
-    let json = JSON.stringify(category);
+  create(token, post):Observable<any>{
+    // Limpiar campo content (htmlEntities > utf-8)
+    post.content = global.htmlEntities(post.content);
+
+    let json = JSON.stringify(post);
     let params = "json="+json;
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -32,6 +35,10 @@ export class PostService {
     return this._http.get(this.url + 'post/' + id, {headers: headers});
   }
   update(token, post, id):Observable<any>{
+
+    // Limpiar campo content (htmlEntities > utf-8)
+    post.content = global.htmlEntities(post.content);
+
     let json = JSON.stringify(post);
     let params = "json="+json;
 

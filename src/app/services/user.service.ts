@@ -44,6 +44,9 @@ export class UserService{
   }
 
   update(token, user): Observable<any>{
+     // Limpiar campo content (htmlEntities > utf-8)
+     user.description = global.htmlEntities(user.description);
+
     let json = JSON.stringify(user);
     let params = 'json='+json;
 

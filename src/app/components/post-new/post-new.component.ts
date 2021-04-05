@@ -21,28 +21,11 @@ export class PostNewComponent implements OnInit {
   public status;
   public froala_options: Object = {
     charCounterCount: true,
-    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],
-    toolbarButtonsXS: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ],
-    toolbarButtonsSM: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ],
-    toolbarButtonsMD: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ]
+    language: 'es',
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat']
   };
   public afuConfig = {
     multiple: false,
@@ -106,21 +89,21 @@ export class PostNewComponent implements OnInit {
     );
   }
 
-  imagenUpload(datos){
+  imagenUpload(datos) {
     // console.log(datos);
-    this.post.image = datos.body.image
+    this.post.image = datos.body.image;
     // console.log(this.post.image)
   }
 
-  onSubmit(form){
+  onSubmit(form) {
     // console.log(this.post);
     this._postService.create(this.token, this.post).subscribe(
       response => {
-        if(response.status == 'success'){
+        if (response.status == 'success') {
           this.post = response.post;
           this.status = 'success';
           this._router.navigate(['/inicio']);
-        }else{
+        } else {
           this.status = 'error';
         }
       },
@@ -128,6 +111,6 @@ export class PostNewComponent implements OnInit {
         console.log(error);
         this.status = 'error';
       }
-    )
+    );
   }
 }

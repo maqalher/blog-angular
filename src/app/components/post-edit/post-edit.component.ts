@@ -19,30 +19,14 @@ export class PostEditComponent implements OnInit {
   public post: Post;
   public categories;
   public status;
+  public url: String;
   public froala_options: Object = {
     charCounterCount: true,
-    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],
-    toolbarButtonsXS: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ],
-    toolbarButtonsSM: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ],
-    toolbarButtonsMD: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ]
+    language: 'es',
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat']
   };
   public afuConfig = {
     multiple: false,
@@ -83,6 +67,7 @@ export class PostEditComponent implements OnInit {
     this.page_title = 'Editar entrada';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+    this.url = global.url;
   }
 
   ngOnInit(): void {
@@ -107,7 +92,7 @@ export class PostEditComponent implements OnInit {
     );
   }
 
-  getPost(){
+  getPost() {
     // Scar el id del post de la url
     this._route.params.subscribe(params => {
       let id = +params['id']; // convierte a int
@@ -116,10 +101,14 @@ export class PostEditComponent implements OnInit {
       // Peticion ajax para sacar los datos del post
       this._postService.getPost(id).subscribe(
         response => {
-          if(response.status == 'success'){
+          if (response.status == 'success') {
             this.post = response.posts;
             // console.log(this.post);
-          }else{
+
+            if (this.post.user_id != this.identity.sub) {
+              this._router.navigate(['inicio']);
+            }
+          } else {
             this._router.navigate(['inicio']);
           }
         },
@@ -127,21 +116,20 @@ export class PostEditComponent implements OnInit {
           console.log(error);
           this._router.navigate(['inicio']);
         }
-      )
+      );
     });
   }
 
-
-  imagenUpload(datos){
+  imagenUpload(datos) {
     // console.log(datos);
-    this.post.image = datos.body.image
+    this.post.image = datos.body.image;
     // console.log(this.post.image)
   }
 
-  onSubmit(form){
+  onSubmit(form) {
     this._postService.update(this.token, this.post, this.post.id).subscribe(
       response => {
-        if(response.status == 'success'){
+        if (response.status == 'success') {
           this.status = 'success';
           this.post = response.post;
 
@@ -151,7 +139,7 @@ export class PostEditComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.status = 'error'
+        this.status = 'error';
       }
     );
   }

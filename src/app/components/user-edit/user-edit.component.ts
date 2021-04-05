@@ -18,35 +18,18 @@ export class UserEditComponent implements OnInit {
   public url;
   public froala_options: Object = {
     charCounterCount: true,
-    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],
-    toolbarButtonsXS: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ],
-    toolbarButtonsSM: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ],
-    toolbarButtonsMD: [
-      'bold',
-      'italic',
-      'underline',
-      'paragraphFormat',
-      'alert'
-    ]
+    language: 'es',
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat']
   };
   public afuConfig = {
     multiple: false,
     formatsAllowed: '.jpg,.png,.gif,.jpeg',
     maxSize: '50',
     uploadAPI: {
-      url: global.url+'user/upload',
+      url: global.url + 'user/upload',
       method: 'POST',
       responseType: 'json',
       headers: {
@@ -129,11 +112,11 @@ export class UserEditComponent implements OnInit {
     );
   }
 
-  avatarUpload(datos){
+  avatarUpload(datos) {
     // console.log(datos.body.image);
     // // console.log(datos);
     // let data = JSON.parse(datos.body);
     // console.log(data);
-    this.user.image = datos.body.image
+    this.user.image = datos.body.image;
   }
 }

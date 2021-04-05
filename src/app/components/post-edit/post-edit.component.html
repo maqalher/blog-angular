@@ -40,9 +40,9 @@
     <div class="form-group">
       <label for="image">Imagen</label>
 
-      <!-- <div *ngIf="identity && identity.image">
-        <img src="{{url + 'user/avatar/'+ identity.image}}" class="avatar_edit" alt="">
-      </div> -->
+      <div *ngIf="post && post.image">
+        <img src="{{url + 'post/image/'+ post.image}}" class="avatar_edit" alt="">
+      </div>
 
       <angular-file-uploader [config]="afuConfig" (ApiResponse)="imagenUpload($event)">
       </angular-file-uploader>
