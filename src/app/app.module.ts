@@ -32,6 +32,7 @@ import { CategoryDetailComponent } from './components/category-detail/category-d
 import { UserService } from './services/user.service';
 import { IdentityGuard } from './services/identity.guard';
 import { ProfilesComponent } from './components/profiles/profiles.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
     PostDetailComponent,
     PostEditComponent,
     CategoryDetailComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,
